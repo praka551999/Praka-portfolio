@@ -325,3 +325,96 @@ window.addEventListener('load', () => {
 });
 
 console.log('%c🚀 Premium Portfolio Loaded Successfully!', 'color: #00ff88; font-size: 16px; font-weight: bold;');
+
+// ========== IMAGE GALLERY ==========
+const galleryImages = {
+    crypto: [
+        'images/Screenshot (464).png',
+        'images/Screenshot (465).png',
+        'images/Screenshot (466).png',
+        'images/Screenshot (467).png',
+        'images/Screenshot (468).png'
+    ]
+};
+
+let currentGallery = [];
+let currentImageIndex = 0;
+
+function openGallery(projectType) {
+    currentGallery = galleryImages[projectType] || [];
+    currentImageIndex = 0;
+
+    const modal = document.getElementById('imageGallery');
+    const totalImages = document.getElementById('totalImages');
+
+    totalImages.textContent = currentGallery.length;
+
+    // Generate thumbnails
+    const thumbnailsContainer = document.getElementById('galleryThumbnails');
+    thumbnailsContainer.innerHTML = '';
+    currentGallery.forEach((img, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = img;
+        thumb.classList.add('gallery-thumbnail');
+        if (index === 0) thumb.classList.add('active');
+        thumb.onclick = () => {
+            currentImageIndex = index;
+            updateGalleryImage();
+        };
+        thumbnailsContainer.appendChild(thumb);
+    });
+
+    updateGalleryImage();
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGallery() {
+    const modal = document.getElementById('imageGallery');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function changeImage(direction) {
+    currentImageIndex += direction;
+
+    if (currentImageIndex < 0) {
+        currentImageIndex = currentGallery.length - 1;
+    } else if (currentImageIndex >= currentGallery.length) {
+        currentImageIndex = 0;
+    }
+
+    updateGalleryImage();
+}
+
+function updateGalleryImage() {
+    const img = document.getElementById('galleryImage');
+    const currentCounter = document.getElementById('currentImage');
+
+    img.src = currentGallery[currentImageIndex];
+    currentCounter.textContent = currentImageIndex + 1;
+
+    // Update active thumbnail
+    const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+    thumbnails.forEach((thumb, index) => {
+        thumb.classList.toggle('active', index === currentImageIndex);
+    });
+}
+
+// Close gallery on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeGallery();
+    } else if (e.key === 'ArrowLeft') {
+        changeImage(-1);
+    } else if (e.key === 'ArrowRight') {
+        changeImage(1);
+    }
+});
+
+// Close gallery when clicking outside the image
+document.getElementById('imageGallery')?.addEventListener('click', (e) => {
+    if (e.target.id === 'imageGallery') {
+        closeGallery();
+    }
+});
