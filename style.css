@@ -577,13 +577,72 @@ body {
     border-radius: 30px;
     background: var(--gradient-primary);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-.image-backdrop {
+.about-skills-display {
     position: absolute;
     inset: 15px;
     background: var(--bg-primary);
     border-radius: 20px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.about-skills-display h4 {
+    font-size: 22px;
+    color: var(--accent);
+    text-align: center;
+    margin: 0;
+}
+
+.skill-categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.skill-category-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tags span {
+    padding: 6px 12px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 15px;
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.skill-tags span:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
 }
 
 .experience-badge {
@@ -974,6 +1033,13 @@ body {
     border-radius: 10px;
     width: 0;
     transition: width 1.5s ease;
+}
+
+/* ========== TECH STACK SECTION ========== */
+.tech-stack-section {
+    padding: 120px 0;
+    background: var(--bg-primary);
+    text-align: center;
 }
 
 /* ========== TECH STACK ========== */
